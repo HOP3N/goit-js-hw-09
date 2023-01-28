@@ -1,8 +1,9 @@
-import flatpickr from 'flatpickr';
-import 'flatpickr/dist/flatpickr.min.css';
+import flatpickr from "flatpickr";
+// Додатковий імпорт стилів
+import "flatpickr/dist/flatpickr.min.css";
 import Notiflix from 'notiflix';
 
-const textEl = document.querySelector('#datetime-picker');
+const text = document.querySelector('#datetime-picker');
 const timerHTML = document.querySelector('.timer');
 const btnStart = document.querySelector('button[data-start]');
 const seconds = document.querySelector('span[data-seconds]');
