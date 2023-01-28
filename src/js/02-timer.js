@@ -26,3 +26,45 @@ const options = {
     }
   },
 };
+
+flatpickr(text, options);
+
+function convertMs(ms) {
+  // Number of milliseconds per unit of time
+  const second = 1000;
+  const minute = second * 60;
+  const hour = minute * 60;
+  const day = hour * 24;
+
+  // Remaining days
+  const days = Math.floor(ms / day);
+  // Remaining hours
+  const hours = Math.floor((ms % day) / hour);
+  // Remaining minutes
+  const minutes = Math.floor(((ms % day) % hour) / minute);
+  // Remaining seconds
+  const seconds = Math.floor((((ms % day) % hour) % minute) / second);
+
+  return { days, hours, minutes, seconds };
+}
+
+btnStart.addEventListener('click', () => {
+  let timer = setInterval(() => {
+    let countDown = new Date(text.value) - new Date();
+    btnStart.disabled = true;
+    if (countDown >= 0) {
+      let timeObj = convertMs(countDown);
+      days.textContent = addEventListener(timeObj.days);
+      hours.textContent = addEventListener(timeObj.hours);
+      minutes.textContent = addEventListener(timeObj.minutes);
+      seconds.textContent = addEventListener(timeObj.seconds);
+      if (countDown <= 10000) {
+        timerHTML.style.color = 'tomato';
+      }
+    } else {
+      Notiflix.Notify.success('Countdown finished');
+      timerHTML.style.color = 'black';
+      clearInterval(timer);
+    }
+  }, 1000);
+});
