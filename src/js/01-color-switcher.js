@@ -1,5 +1,3 @@
-'use strict';
-
 const btnStart = document.querySelector('button[data-start]');
 const btnStop = document.querySelector('button[data-stop]');
 btnStop.disabled = true;
@@ -23,4 +21,3 @@ btnStop.addEventListener('click', () => {
   btnStart.disabled = false;
   btnStop.disabled = true;
 });
-

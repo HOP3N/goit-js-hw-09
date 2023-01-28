@@ -1,10 +1,9 @@
-import flatpickr from "flatpickr";
-// Додатковий імпорт стилів
-import "flatpickr/dist/flatpickr.min.css";
+import flatpickr from 'flatpickr';
+import 'flatpickr/dist/flatpickr.min.css';
 import Notiflix from 'notiflix';
 
 const text = document.querySelector('#datetime-picker');
-const timerHTML = document.querySelector('.timer');
+const timerHtml = document.querySelector('.timer');
 const btnStart = document.querySelector('button[data-start]');
 const seconds = document.querySelector('span[data-seconds]');
 const minutes = document.querySelector('span[data-minutes]');
@@ -49,22 +48,26 @@ function convertMs(ms) {
   return { days, hours, minutes, seconds };
 }
 
+function addLeadingZero(value) {
+  return value.toString().padStart(2, '0');
+}
+
 btnStart.addEventListener('click', () => {
   let timer = setInterval(() => {
-    let countDown = new Date(text.value) - new Date();
+    let countdown = new Date(text.value) - new Date();
     btnStart.disabled = true;
-    if (countDown >= 0) {
-      let timeObj = convertMs(countDown);
-      days.textContent = addEventListener(timeObj.days);
-      hours.textContent = addEventListener(timeObj.hours);
-      minutes.textContent = addEventListener(timeObj.minutes);
-      seconds.textContent = addEventListener(timeObj.seconds);
-      if (countDown <= 10000) {
-        timerHTML.style.color = 'tomato';
+    if (countdown >= 0) {
+      let timeObject = convertMs(countdown);
+      days.textContent = addLeadingZero(timeObject.days);
+      hours.textContent = addLeadingZero(timeObject.hours);
+      minutes.textContent = addLeadingZero(timeObject.minutes);
+      seconds.textContent = addLeadingZero(timeObject.seconds);
+      if (countdown <= 10000) {
+        timerHtml.style.color = 'tomato';
       }
     } else {
       Notiflix.Notify.success('Countdown finished');
-      timerHTML.style.color = 'black';
+      timerHtml.style.color = 'black';
       clearInterval(timer);
     }
   }, 1000);
